@@ -143,8 +143,9 @@ class ApplanixPublisher(object):
         """
         rospy.logdebug("Navigation received")
         # If we don't have a fix, don't publish anything...
-        if self.nav_status.status == NavSatStatus.STATUS_NO_FIX:
-            return
+        # if self.nav_status.status == NavSatStatus.STATUS_NO_FIX:
+        #     print 'no fix'
+        #     return
 
         # Changing from NED from the Applanix to ENU in ROS
         # Roll is still roll, since it's WRT to the x axis of the vehicle
