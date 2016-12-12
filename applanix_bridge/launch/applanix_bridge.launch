@@ -9,7 +9,7 @@
   <group ns="applanix">
     <rosparam command="load" file="$(arg param_file)"/>
      
-    <node name="applanix_bridge" pkg="applanix_bridge" type="bridge" />
+    <node name="applanix_bridge" pkg="applanix_bridge" type="bridge" output="screen"/>
     <node name="applanix_params" pkg="applanix_bridge" type="params" />
     <node name="applanix_publisher" pkg="applanix_bridge" type="publisher" output="screen" >
       <rosparam subst_value="true">

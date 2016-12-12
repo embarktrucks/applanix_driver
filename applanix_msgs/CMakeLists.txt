@@ -97,6 +97,7 @@ add_message_files(
   RawPPS.msg
   SaveRestoreControl.msg
   TimeDistance.msg
+  TimeSync.msg
   TimeSyncControl.msg
   UserAccuracySpecs.msg
   UserTimeStatus.msg

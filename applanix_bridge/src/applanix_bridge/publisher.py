@@ -46,7 +46,7 @@ import tf
 import PyKDL
 
 # Applanix node internal messages & modules
-from applanix_msgs.msg import NavigationSolution, GNSSStatus, IMUData
+from applanix_msgs.msg import NavigationSolution, GNSSStatus, IMUData, TimeSync
 import geodesy.utm
 
 # ROS standard messages
@@ -120,6 +120,7 @@ class ApplanixPublisher(object):
         self.pub_origin = rospy.Publisher('origin', Pose, queue_size=5)
         self.pub_navsatfix = rospy.Publisher('gps_fix', NavSatFix, queue_size=5)
         self.pub_navsatstatus = rospy.Publisher('gps_status', NavSatStatus, queue_size=5)
+        self.pub_time = rospy.Publisher('time', TimeSync, queue_size=5)
         if self.publish_tf:
             self.tf_broadcast = tf.TransformBroadcaster()
 
@@ -152,6 +153,13 @@ class ApplanixPublisher(object):
         # Pitch is -ve since axis goes the other way (+y to right vs left)
         # Yaw (or heading) in Applanix is clockwise starting with North
         # In ROS it's counterclockwise startin with East
+        time_stat = TimeSync()
+        time_stat.ros_time = rospy.Time.now()
+        time_stat.gps_time = data.td
+        self.pub_time.publish(time_stat)
+        t1 = time_stat.ros_time.secs + time_stat.ros_time.nsecs / 1E9
+        t2 = time_stat.gps_time.time1
+        print '{0:6f}'.format(t1 - t2)
         orient = PyKDL.Rotation.RPY(RAD(data.roll), RAD(-data.pitch), RAD(90-data.heading)).GetQuaternion()
 
         # UTM conversion

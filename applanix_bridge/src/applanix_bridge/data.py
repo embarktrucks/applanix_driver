@@ -81,6 +81,7 @@ class DataPort(Port):
         handlers[(applanix_msgs.msg.CommonHeader.START_GROUP, group_num)] = \
             GroupHandler(*groups[group_num], listener=listener.listener_for(group_num))
     for msg_num in msgs.keys():
+      print msgs[msg_num]
       handlers[(applanix_msgs.msg.CommonHeader.START_MESSAGE, msg_num)] = \
           MessageHandler(*msgs[msg_num], all_msgs=all_msgs)
 

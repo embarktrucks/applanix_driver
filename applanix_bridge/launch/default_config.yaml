@@ -22,8 +22,8 @@ gams_params:
   baseline_vector: { x: 0, y:  2.1209, z: 0}
   max_heading_error_rms: 3.0
 
-dmi_params:
-  dmi_scale_factor: 1324
-  dmi_lever_arm: {x: -3.940, y: -1.0869, z: 3.2561}
+# dmi_params:
+#   dmi_scale_factor: 1295
+#   dmi_lever_arm: {x: -3.940, y: -1.0869, z: 3.2561}
 
 rate: 100
