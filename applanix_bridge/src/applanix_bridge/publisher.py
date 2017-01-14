@@ -159,7 +159,7 @@ class ApplanixPublisher(object):
         self.pub_time.publish(time_stat)
         t1 = time_stat.ros_time.secs + time_stat.ros_time.nsecs / 1E9
         t2 = time_stat.gps_time.time1
-        print '{0:6f}'.format(t1 - t2)
+        # print '{0:6f}'.format(t1 - t2)
         orient = PyKDL.Rotation.RPY(RAD(data.roll), RAD(-data.pitch), RAD(90-data.heading)).GetQuaternion()
 
         # UTM conversion
