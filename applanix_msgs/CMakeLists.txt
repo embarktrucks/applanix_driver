@@ -98,6 +98,7 @@ add_message_files(
   SaveRestoreControl.msg
   TimeDistance.msg
   TimeSync.msg
+  NewTimeSync.msg
   TimeSyncControl.msg
   UserAccuracySpecs.msg
   UserTimeStatus.msg
