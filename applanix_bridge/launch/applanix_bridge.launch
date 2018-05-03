@@ -6,9 +6,9 @@
   <arg name="zero_start" default="True"/>
   <arg name="origin" default="None"/>
 
-  <group ns="applanix">
+  <group ns="applanix_real">
     <rosparam command="load" file="$(arg param_file)"/>
-     
+
     <node name="applanix_bridge" pkg="applanix_bridge" type="bridge" output="screen" respawn="true"/>
     <node name="applanix_params" pkg="applanix_bridge" type="params" />
     <node name="applanix_publisher" pkg="applanix_bridge" type="publisher" output="screen" respawn="true">

@@ -132,7 +132,7 @@ class ApplanixPublisher(object):
         self.init = False       # If we've been initialized
 
         # Subscribed topics
-        rospy.Subscriber('nav', NavigationSolution, self.navigation_handler)
+        rospy.Subscriber('applanix_real/nav', NavigationSolution, self.navigation_handler)
         rospy.Subscriber('status/gnss/primary', GNSSStatus, self.status_handler)
 
     def navigation_handler(self, data):
