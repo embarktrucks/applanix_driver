@@ -115,12 +115,12 @@ class ApplanixPublisher(object):
             rospy.set_param('/gps_origin', origin_param)
 
         # Topic publishers
-        self.pub_imu = rospy.Publisher('imu_data', Imu, queue_size=5)
-        self.pub_odom = rospy.Publisher('gps_odom', Odometry, queue_size=5)
-        self.pub_origin = rospy.Publisher('origin', Pose, queue_size=5)
-        self.pub_navsatfix = rospy.Publisher('gps_fix', NavSatFix, queue_size=5)
-        self.pub_navsatstatus = rospy.Publisher('gps_status', NavSatStatus, queue_size=5)
-        self.pub_time = rospy.Publisher('time', TimeSync, queue_size=5)
+        self.pub_imu = rospy.Publisher('imu_data_real', Imu, queue_size=5)
+        self.pub_odom = rospy.Publisher('gps_odom_real', Odometry, queue_size=5)
+        self.pub_origin = rospy.Publisher('origin_real', Pose, queue_size=5)
+        self.pub_navsatfix = rospy.Publisher('gps_fix_real', NavSatFix, queue_size=5)
+        self.pub_navsatstatus = rospy.Publisher('gps_status_real', NavSatStatus, queue_size=5)
+        self.pub_time = rospy.Publisher('time_real', TimeSync, queue_size=5)
         if self.publish_tf:
             self.tf_broadcast = tf.TransformBroadcaster()
 
