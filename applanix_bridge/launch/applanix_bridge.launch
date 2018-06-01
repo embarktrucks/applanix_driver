@@ -4,6 +4,7 @@
   <remap from="/applanix/imu_data" to="/applanix_og/imu_data"/>
   <remap from="/applanix/gps_fix" to="/applanix_og/gps_fix"/>
   <remap from="/applanix/gps_odom" to="/applanix_og/gps_odom"/>
+  <remap from="/applanix/imu" to="/applanix_og/imu"/>
   <remap from="/applanix/origin" to="/applanix_og/origin"/>
 
   <arg name="param_file" default="$(find applanix_bridge)/launch/default_config.yaml"/>
