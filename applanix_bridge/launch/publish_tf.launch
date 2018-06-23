@@ -1,6 +1,7 @@
 <launch>
   <group ns="applanix">
-    <node name="applanix_publisher" pkg="applanix_bridge" type="publisher" >
+    <node name="applanix_publisher" pkg="applanix_bridge" type="publisher" 
+     launch-prefix="log_stdout" >
       <param name="publish_tf" value="True" />
       <param name="odom_frame" value="gps_odom" />
       <param name="base_frame" value="base_footprint" />
