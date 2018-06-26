@@ -9,11 +9,11 @@
   <group ns="applanix">
     <rosparam command="load" file="$(arg param_file)"/>
      
-    <node name="applanix_bridge" pkg="applanix_bridge" type="bridge" output="screen" respawn="true"
+    <node name="applanix_bridge" pkg="applanix_bridge" type="bridge" respawn="true"
      launch-prefix="log_stdout" />
     <node name="applanix_params" pkg="applanix_bridge" type="params" 
      launch-prefix="log_stdout" />
-    <node name="applanix_publisher" pkg="applanix_bridge" type="publisher" output="screen" respawn="true"
+    <node name="applanix_publisher" pkg="applanix_bridge" type="publisher" respawn="true"
      launch-prefix="log_stdout" >
       <rosparam subst_value="true">
         publish_tf: $(arg publish_tf)
