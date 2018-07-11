@@ -106,6 +106,9 @@ def main():
   # For testing the node itself--to exercise downstream algorithms, use a bag.
   pcap_file_name = rospy.get_param('pcap_file', False)
 
+  # handle shutdown, even when we're still starting up
+  rospy.on_shutdown(shutdown)
+  
   if not pcap_file_name:
     sock = create_sock('data', ip, data_port)
   else:
@@ -121,7 +124,6 @@ def main():
     rospy.loginfo("Port %s thread started." % name)
   monitor.start()
 
-  rospy.on_shutdown(shutdown)
   rospy.spin()
 
 
@@ -129,12 +131,12 @@ def create_sock(name, ip, port):
   try:
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     ip_port = (ip, port)
+    socks.append(sock)
     sock.connect(ip_port)
     rospy.loginfo("Successfully connected to %%s port at %s:%d" % ip_port % name)
   except socket.error as e:
     rospy.logfatal("Couldn't connect to %%s port at %s:%d: %%s" % ip_port % (name, str(e)))
     exit(1)
-  socks.append(sock)
   return sock
 
 
@@ -171,12 +173,14 @@ def create_test_sock(pcap_filename):
 
 
 def shutdown():
-  monitor.finish.set()
-  monitor.join()
+  if monitor.is_alive():
+    monitor.finish.set()
+    monitor.join()
   rospy.loginfo("Thread monitor finished.") 
   for name, port in ports.items():
-    port.finish.set()
-    port.join()
+    if port.is_alive():
+      port.finish.set()
+      port.join()
     rospy.loginfo("Port %s thread finished." % name) 
   for sock in socks:
     sock.shutdown(socket.SHUT_RDWR)
