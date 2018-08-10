@@ -54,6 +54,9 @@ from sensor_msgs.msg import Imu, NavSatFix, NavSatStatus
 from nav_msgs.msg import Odometry
 from geometry_msgs.msg import Quaternion, Point, Pose
 
+# embark messages
+from perception_msgs.msg import Gnss
+
 # Other
 from math import radians as RAD
 
@@ -121,6 +124,7 @@ class ApplanixPublisher(object):
         self.pub_navsatfix = rospy.Publisher('gps_fix', NavSatFix, queue_size=5)
         self.pub_navsatstatus = rospy.Publisher('gps_status', NavSatStatus, queue_size=5)
         self.pub_time = rospy.Publisher('time', TimeSync, queue_size=5)
+        self.pub_gnss = rospy.Publisher('gnss', Gnss, queue_size=5)
         if self.publish_tf:
             self.tf_broadcast = tf.TransformBroadcaster()
 
@@ -263,6 +267,21 @@ class ApplanixPublisher(object):
 
         self.pub_imu.publish(imu)
 
+        gnss.latitude  = data.latitude
+        gnss.longitude = data.logitude
+        gnss.altitude  = data.altitude
+        
+        gnss.roll    = data.roll
+        gnss.pitch   = data.pitch
+        gnss.heading = data.heading
+        
+        gnss.speed = data.speed
+
+        gnss.long_accel  = data.long_accel
+        gnss.trans_accel = data.trans_accel
+        gnss.down_accel  = data.down_accel
+
+        self.pub_gnss.publish(gnss)
 
         pass
 
