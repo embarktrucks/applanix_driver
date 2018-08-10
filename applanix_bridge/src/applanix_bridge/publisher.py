@@ -266,9 +266,10 @@ class ApplanixPublisher(object):
         imu.linear_acceleration_covariance = IMU_ACCEL_COVAR
 
         self.pub_imu.publish(imu)
-
+        
+        gnss = Gnss()
         gnss.latitude  = data.latitude
-        gnss.longitude = data.logitude
+        gnss.longitude = data.longitude
         gnss.altitude  = data.altitude
         
         gnss.roll    = data.roll
