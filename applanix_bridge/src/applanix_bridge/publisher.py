@@ -115,12 +115,23 @@ class ApplanixPublisher(object):
             rospy.set_param('/gps_origin', origin_param)
 
         # Topic publishers
-        self.pub_imu = rospy.Publisher('imu_data', Imu, queue_size=5)
-        self.pub_odom = rospy.Publisher('gps_odom', Odometry, queue_size=5)
-        self.pub_origin = rospy.Publisher('origin', Pose, queue_size=5)
-        self.pub_navsatfix = rospy.Publisher('gps_fix', NavSatFix, queue_size=5)
-        self.pub_navsatstatus = rospy.Publisher('gps_status', NavSatStatus, queue_size=5)
-        self.pub_time = rospy.Publisher('time', TimeSync, queue_size=5)
+        self.pub_imu = rospy.Publisher('imu_data', Imu,
+                                       queue_size=5,
+                                       tcp_nodelay=True)
+        self.pub_odom = rospy.Publisher('gps_odom', Odometry,
+                                        queue_size=5,
+                                        tcp_nodelay=True)
+        self.pub_origin = rospy.Publisher('origin', Pose,
+                                          queue_size=5,
+                                          tcp_nodelay=True)
+        self.pub_navsatfix = rospy.Publisher('gps_fix', NavSatFix,
+                                             queue_size=5,
+                                             tcp_nodelay=True)
+        self.pub_navsatstatus = rospy.Publisher('gps_status', NavSatStatus,
+                                                queue_size=5,
+                                                tcp_nodelay=True)
+        self.pub_time = rospy.Publisher('time', TimeSync, queue_size=5,
+                                        tcp_nodelay=True)
         if self.publish_tf:
             self.tf_broadcast = tf.TransformBroadcaster()
 
@@ -132,8 +143,10 @@ class ApplanixPublisher(object):
         self.init = False       # If we've been initialized
 
         # Subscribed topics
-        rospy.Subscriber('nav', NavigationSolution, self.navigation_handler)
-        rospy.Subscriber('status/gnss/primary', GNSSStatus, self.status_handler)
+        rospy.Subscriber('nav', NavigationSolution, self.navigation_handler,
+                         tcp_nodelay=True)
+        rospy.Subscriber('status/gnss/primary', GNSSStatus, self.status_handler,
+                         tcp_nodelay=True)
 
     def navigation_handler(self, data):
         """ Rebroadcasts navigation data in the following formats:
