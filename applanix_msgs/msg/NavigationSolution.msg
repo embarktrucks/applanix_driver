@@ -1,5 +1,7 @@
 TimeDistance td
 
+trace_msgs/TraceId trace_id
+
 # Position in degrees
 float64 latitude
 float64 longitude

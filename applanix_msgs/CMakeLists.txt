@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   geometry_msgs
   rospy
+  trace_msgs
 )
 
 # this is needed because this module includes a python library for inspecting
@@ -119,6 +120,7 @@ add_service_files(
 generate_messages(
   DEPENDENCIES
   geometry_msgs
+  trace_msgs
 )
 
 catkin_package()
